@@ -15,6 +15,7 @@ import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 import NoMatch from './Components/Nomatch/NoMatch';
+import Background from './images/Bg.png';
 import VehicleDetails from './Components/VehicleDetails/VehicleDetails';
 library.add(fab)
 export const userContext = createContext();
@@ -23,9 +24,12 @@ export const userContext = createContext();
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   return (
-    <userContext.Provider value={[loggedInUser, setLoggedInUser]}>
-      <img src={loggedInUser.photoURL} alt=""/>
-      {loggedInUser.isSigned && <p>{loggedInUser.name}</p>}
+    <div classname="router-container" style={{ 
+      backgroundColor: "lightcyan",
+      background:"cover", 
+      height: "1000px"
+    }}>
+      <userContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
       <Header/>
         <Switch>
@@ -56,6 +60,7 @@ function App() {
         </Switch>
     </Router>
     </userContext.Provider>
+    </div>
   )
 }
 

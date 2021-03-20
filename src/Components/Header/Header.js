@@ -11,6 +11,7 @@ if (firebase.apps.length === 0) {
 
 const Header = () => {
     const [loggedInUser, setLoggedInUser] = useContext(userContext);
+    console.log(loggedInUser)
     const handleSignOut = () => {
         firebase.auth().signOut().then(() => {
             setLoggedInUser([]);
@@ -21,12 +22,13 @@ const Header = () => {
     return (
         <div className='m-5 header-container'>
             <nav class="navbar navbar-expand-lg navbar-light">
+            {loggedInUser.isSigned && <h3>{loggedInUser.displayName}</h3>}
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse  justify-content-end" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        {loggedInUser.isSigned && <h3>{loggedInUser.name}</h3>}
+                    
                         <Link class="nav-item nav-link" to="/home">Home <span class="sr-only">(current)</span></Link>
                         <Link class="nav-item nav-link" to="/destination">Destination</Link>
                         <Link class="nav-item nav-link" to="/blog">Blog</Link>

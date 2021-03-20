@@ -10,8 +10,6 @@ const VehicleDetails = () => {
     const { id } = useParams();
     const fakeDatas = fakeData;
     const vehicleData = fakeDatas.find(vehicle => vehicle.id === parseInt(id));
-    console.log(fakeDatas);
-    console.log(vehicleData);
     const [vehicleInfo, setVehicleInfo] = useState({
         isSet: false,
         showForm: true

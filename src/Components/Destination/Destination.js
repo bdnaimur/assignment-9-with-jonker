@@ -6,11 +6,7 @@ import person from '../../images/peopleicon.png';
 import arrow from '../../images/red-down-arrow.png';
 
 const Destination = () => {
-    const { id } = useParams();
-    const fakeDatas = fakeData;
-    const vehicleData = fakeDatas.find(vehicle => vehicle.id === parseInt(id));
-    console.log(fakeDatas);
-    console.log(vehicleData);
+
     const [vehicleInfo, setVehicleInfo] = useState({
         isSet: false,
         showForm: true

@@ -18,8 +18,8 @@ const Signup = () => {
     const [user, setUser] = useState({
         email: '',
         password: '',
-        error: ''
-        
+        error: '',
+        name: ''        
     });
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     const facebookProvider = new firebase.auth.FacebookAuthProvider();
@@ -58,14 +58,18 @@ const Signup = () => {
             });
     }
     const hanldeCreateSubmit = (e) => {
-        const {name, email, password } = user;
+        const {displayName, email, password } = user;
+        console.log(user);
+        console.log(displayName);       
         if (user.email && user.password) {
             firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    const user = userCredential.user;
-                    user.isSigned = true;
-                    setUser(user);
-                    setLoggedInUser(user);
+                    const newUser = userCredential.user;
+                    const allInfo = {...user}
+                    allInfo.isSigned = true;
+                    setUser(allInfo);
+                    setLoggedInUser(allInfo);                       
+                    updateUserName(user.displayName);
                     console.log(loggedInUser);
                     if (loggedInUser) {
                         history.replace(from);
@@ -91,6 +95,18 @@ const Signup = () => {
         }
         e.preventDefault();
     }
+
+    const updateUserName = name =>{
+        const user = firebase.auth().currentUser;
+        user.updateProfile({
+        displayName: name
+        }).then(function() {
+        // Update successful.
+        }).catch(function(error) {
+        // An error happened.
+        });
+      }
+
     const handleBlur = (e) => {
         let isFieldValid = true;
         if (e.target.name === 'email') {
@@ -108,15 +124,14 @@ const Signup = () => {
             setLoggedInUser(userSignInfo);
         }
     }
-
-    console.log(user);
+    console.log(loggedInUser);
 
     return (
         <div className="form-styling">
             {user.error && <h6 style={{color:'red', textAlign:"center"}}>{user.error}</h6>}
             <form onSubmit={hanldeCreateSubmit} className="form-style" >
                 <h3>Create an account</h3>
-                <input onBlur={handleBlur} type="text" name="name" id="" placeholder="Name" required />
+                <input onBlur={handleBlur} type="text" name="displayName" id="" placeholder="Name" required />
                 <input onBlur={handleBlur} type="email" name="email" id="inputEmail4" placeholder="Email" required />
                 <input onBlur={handleBlur} type="password" name="password" id="" placeholder="Password" required />
                 <input onBlur={handleBlur} type="password" name="repassword" id="" placeholder="Confirm Password" required />

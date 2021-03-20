@@ -63,12 +63,12 @@ const Signin = () => {
     const hanldeSignInSubmit = (e) => {
         const { email, password } = user;
         firebase.auth().signInWithEmailAndPassword(email, password)            
-            .then((userCredential) => {
-                const user = userCredential.user;
+            .then(res => {
+                const user = res.user;
                 user.isSigned = true;
                 setUser(user);
-                console.log(user);
-                setLoggedInUser(user);
+                console.log(user)
+                setLoggedInUser(user);  
                 if (loggedInUser) {
                     history.replace(from);
                 }

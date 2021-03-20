@@ -11,8 +11,11 @@
     background-color: tomato;
     color: white;
 }
-.header-container{
+/* .header-container{
     background-image: url("../../images/Bg.png");
-    background-size: cover;
+    background-size:contain;
+    background-position:top;
+    background: cover;
+    background-repeat: no-repeat; */
     
-}
+/* } */

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Vehicle = (props) => {
-    console.log(props);
     const {name,img,id} = props.vahicle;
     return (
         <div className='col-lg-3 col-md-4 col-sm-6 mt-5'>
