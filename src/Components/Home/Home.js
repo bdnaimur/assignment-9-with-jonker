@@ -5,7 +5,7 @@ import Vehicle from '../Vehicle/Vehicle';
 const Home = () => {
     const vehicles = fakeData;
     return (
-        <div className='container'>
+        <div style={{paddingBottom:"100px"}} className='container'>
             <div className="row justify-content-between">
             {vehicles.map(vehicle => <Vehicle vahicle={vehicle}></Vehicle>)}
             </div>            

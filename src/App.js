@@ -23,12 +23,8 @@ export const userContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
-  return (
-    <div classname="router-container" style={{ 
-      backgroundColor: "lightcyan",
-      background:"cover", 
-      height: "1000px"
-    }}>
+  return (  
+    <div className="router-container" >
       <userContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
       <Header/>
@@ -51,7 +47,7 @@ function App() {
           <PrivateRoute path="/destinationKey/:id">
               <VehicleDetails/>
             </PrivateRoute>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
           <Route path="*">

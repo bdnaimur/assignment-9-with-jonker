@@ -32,7 +32,7 @@ const Header = () => {
                         <Link class="nav-item nav-link" to="/home">Home <span class="sr-only">(current)</span></Link>
                         <Link class="nav-item nav-link" to="/destination">Destination</Link>
                         <Link class="nav-item nav-link" to="/blog">Blog</Link>
-                        <Link class="nav-item nav-link " to="/contact">Contact</Link>
+                        <Link class="nav-item nav-link " to="/home">Contact</Link>
                         {loggedInUser.isSigned ? <Link to='/'><button onClick={handleSignOut} className='nav-item nav-link button btn'>Sign Out</button></Link> : <Link to='/signin'><button className='nav-item nav-link button btn'>Login</button></Link>}
 
                     </div>

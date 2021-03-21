@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import fakeData from '../../fakeData';
 import image1 from '../../images/Map.png';
-import person from '../../images/peopleicon.png';
-import arrow from '../../images/arrow1.png';
+import ResultShow from '../ResultShow/ResultShow';
 
 
 const VehicleDetails = () => {
@@ -15,11 +14,10 @@ const VehicleDetails = () => {
         showForm: true
     })
     const handleSubmit = (e) => {
-        const newInfo = { ...vehicleInfo }
+        const newInfo = { ...vehicleInfo,...vehicleData }
         newInfo.isSet = true;
         newInfo.showForm = false;
         setVehicleInfo(newInfo);
-        // console.log("clicked", searchValue);
         e.preventDefault();
         e.target.reset();
     }
@@ -35,6 +33,7 @@ const VehicleDetails = () => {
             setVehicleInfo(userSignInfo);
         }
     }
+    console.log(vehicleInfo);
     return (
         <div className="container">
             <div className="row">
@@ -55,31 +54,8 @@ const VehicleDetails = () => {
                             </div>
                         }
                         {vehicleInfo.isSet &&
-                            <div className="parentDiv">
-                                <div className="search-result">
-                                    <h1>{vehicleInfo.pick}</h1>
-                                    <div><img style={{width:"80px", height:"100px", backgroundColor:"lightgray"}} src={arrow} alt=""/></div>
-                                    <h1>{vehicleInfo.drop}</h1>
-                                </div>
-                                <div style={{ display: "flex", margin: "20px 0", backgroundColor: "white", padding: "0 10px", borderRadius: "5px" }}>
-                                    <img style={{ width: "70px", height: "70px", marginRight: "20px" }} src={vehicleData.img} alt="" />
-                                    <h3 style={{ marginRight: "15px", marginTop: "15px" }}>{vehicleData.name}</h3>
-                                    <img style={{ width: "30px", height: "30px", marginTop: "15px" }} src={person} alt="" /><h6 style={{ marginRight: "15px", marginTop: "15px" }}>{vehicleData.person1}</h6>
-                                    <h4 style={{ marginTop: "15px" }} >$ {vehicleData.price}</h4>
-                                </div>
-                                <div style={{ display: "flex", margin: "20px 0", backgroundColor: "white", padding: "0 10px", borderRadius: "5px" }}>
-                                    <img style={{ width: "70px", height: "70px", marginRight: "20px" }} src={vehicleData.img} alt="" />
-                                    <h3 style={{ marginRight: "15px", marginTop: "15px" }}>{vehicleData.name}</h3>
-                                    <img style={{ width: "30px", height: "30px", marginTop: "15px" }} src={person} alt="" /><h6 style={{ marginRight: "15px", marginTop: "15px" }}>{vehicleData.person2}</h6>
-                                    <h4 style={{ marginTop: "15px" }}>$ {vehicleData.price * 2}</h4>
-                                </div>
-                                <div style={{ display: "flex", margin: "20px 0", backgroundColor: "white", padding: "0 10px", borderRadius: "5px" }}>
-                                    <img style={{ width: "70px", height: "70px", marginRight: "20px" }} src={vehicleData.img} alt="" />
-                                    <h3 style={{ marginRight: "15px", marginTop: "15px" }}>{vehicleData.name}</h3>
-                                    <img style={{ width: "30px", height: "30px", marginTop: "15px" }} src={person} alt="" /><h6 style={{ marginRight: "15px", marginTop: "15px" }}>{vehicleData.person3}</h6>
-                                    <h5 style={{ marginTop: "15px" }}>$ {vehicleData.price * 3}</h5>
-                                </div>
-                            </div>
+
+                            <ResultShow vehicleInfo={vehicleInfo}></ResultShow>
                         }
                     </form>
                 </div>
