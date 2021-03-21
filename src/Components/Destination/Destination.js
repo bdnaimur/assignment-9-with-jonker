@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react';        
 import fakeData from '../../fakeData';
 import image1 from '../../images/Map.png';
 import ResultShow from '../ResultShow/ResultShow';
@@ -8,13 +8,16 @@ const Destination = () => {
     const [vehicleInfo, setVehicleInfo] = useState({
         isSet: false,
         showForm: true,
+        selected: false,
         selectBtn: false
     })
     const handleSubmit = (e) => {
-        const newInfo = { ...vehicleInfo }
-        newInfo.isSet = true;
-        newInfo.showForm = false;
-        setVehicleInfo(newInfo);
+        if(vehicleInfo.selected){
+            const newInfo = { ...vehicleInfo }
+            newInfo.isSet = true;
+            newInfo.showForm = false;
+            setVehicleInfo(newInfo);
+        }
         e.preventDefault();
         e.target.reset();
     }
@@ -30,11 +33,12 @@ const Destination = () => {
             setVehicleInfo(userSignInfo);
         }
     }
-    const handleClick = (e) =>{
+    const handleChange = (e) =>{
         const fakeDatas = fakeData;
         const selectedItem  = fakeDatas.find(item => item.id == e.target.value);
         const newInfo = {...vehicleInfo, ...selectedItem};
         newInfo.selectBtn = true;
+        newInfo.selected = true;
         setVehicleInfo(newInfo);
         console.log(newInfo);
         console.log(e.target.value);
@@ -45,7 +49,7 @@ const Destination = () => {
             <div className="row">
                 <div className="col-md-4">
                     <form onSubmit={handleSubmit} style={{ backgroundColor: "lightgray", borderRadius: "10px", padding: "15px 20px" }}>
-                        {vehicleInfo.showForm &&
+                        {(vehicleInfo.showForm) &&
                             <div className="input-parent">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"><strong>Pick</strong></label>
@@ -56,7 +60,7 @@ const Destination = () => {
                                     <input type="text" onBlur={handleBlur} name="drop" class="form-control" id="exampleInputPassword1" placeholder="Location To" required />
                                     <br />
                                     <input style={{marginRight:"20px"}} className="btn btn-primary" type="submit" value="Search" />
-                                    <select onChange={handleClick}  class="form-select btn btn-danger" aria-label="Default select example">
+                                    <select onChange={handleChange}  class="form-select btn btn-danger" aria-label="Default select example">
                                         <option selected disabled>Open this select menu</option>
                                         <option value="1">Bike</option>
                                         <option value="2">Bus</option>
